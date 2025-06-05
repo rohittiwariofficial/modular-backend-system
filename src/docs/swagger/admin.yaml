@@ -1,0 +1,15 @@
+paths:
+  /api/admin/overview:
+    get:
+      tags:
+        - Admin
+      summary: Admin-only dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Admin access granted
+        "403":
+          description: Forbidden – requires admin role
+        "401":
+          description: Unauthorized

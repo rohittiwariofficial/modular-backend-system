@@ -1,0 +1,13 @@
+paths:
+  /api/user/dashboard:
+    get:
+      tags:
+        - User
+      summary: View user dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Returns user dashboard
+        "401":
+          description: Unauthorized
