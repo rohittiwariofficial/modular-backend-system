@@ -6,7 +6,7 @@ export const loginUser = (req: Request, res: Response): void => {
 
     if ( email && password ) {
         const mockUserId = "123";
-        const token = generateToken(mockUserId);
+        const token = generateToken({id: mockUserId});
         res.status(200).json({ token });
     }
 
