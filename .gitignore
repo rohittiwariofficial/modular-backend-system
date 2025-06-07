@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local environment variables (DO NOT COMMIT)
+.env
+.env.local
+.env.production
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+
+# OS junk
+.DS_Store
+
+# Allow the example env file
+!.env.example
