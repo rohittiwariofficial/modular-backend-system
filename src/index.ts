@@ -1,10 +1,12 @@
 import express, { Express, Response } from 'express';
 import dotenv from 'dotenv';
+// Load environment variables before anything else
+dotenv.config();
 import cors from 'cors';
 import { protect } from './shared/middleware/auth.middleware';
 import { AuthRequest } from './types/express';
 import { connectMongo } from './config/db.mongo';
-// import redis from './config/db.redis';
+import redis from './config/db.redis';
 import { setupSwagger } from './config/swagger';
 import authRoutes from './services/auth/routes/auth.route';
 import userRoutes from './services/user/routes/user.route';
@@ -28,6 +30,11 @@ app.use(express.json());
 })();
 // DO NOT call redis.connect() manually — ioredis auto-connects
 // redis.connect().catch(err => console.log('❌ Redis connect error:', err));
+async function connectRedis() {
+  await redis.connect(); // Connect once when app starts
+}
+
+connectRedis();
 
 // Swagger
 setupSwagger(app);
