@@ -19,18 +19,15 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
 
-      # Deploy depends on your hosting platform; example below for Render or Railway CLI
-      - name: Deploy to Render
+      - name: Run tests
+        run: npm test
+
+      - name: 🚀 Trigger Render Deploy Hook
         env:
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-        run: |
-          curl -X POST https://api.render.com/deploy/srv-${RENDER_SERVICE_ID} \
-            -H "Authorization: Bearer ${RENDER_API_KEY}" \
-            -H "Content-Type: application/json" \
-            -d '{}'
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: curl "$RENDER_DEPLOY_HOOK"
